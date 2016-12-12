@@ -1,0 +1,19 @@
+{
+  "name": "dependent-counts",
+  "version": "1.0.0",
+  "description": "Get counts of how many packages depend on the given package. Works offline.",
+  "main": "counts.json",
+  "repository": "https://github.com/zeke/dependent-counts",
+  "author": "zeke",
+  "license": "MIT",
+  "devDependencies": {
+    "dependent-packages": "^2.0.0",
+    "require-dir": "^0.3.1",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.6.3"
+  },
+  "scripts": {
+    "build": "node count.js > counts.json",
+    "test": "node test.js | tap-spec"
+  }
+}
