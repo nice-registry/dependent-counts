@@ -1,6 +1,6 @@
 {
   "name": "dependent-counts",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Get counts of how many packages depend on the given package. Works offline.",
   "main": "counts.json",
   "repository": "https://github.com/zeke/dependent-counts",
