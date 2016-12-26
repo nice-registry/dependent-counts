@@ -7,8 +7,8 @@ var counts = []
 Object.keys(dependents).forEach(packageName => {
   counts.push({
     name: packageName,
-    dependents: dependents[packageName].length,
-    devDependents: 0
+    directDependents: dependents[packageName].length,
+    directDevDependents: 0
   })
   process.stderr.write('.')
 })
@@ -17,17 +17,19 @@ Object.keys(devDependents).forEach(packageName => {
   var count = counts.find(count => count.name === packageName)
 
   if (count) {
-    count.devDependents = devDependents[packageName].length
+    count.directDevDependents = devDependents[packageName].length
   } else {
     counts.push({
       name: packageName,
-      dependents: 0,
-      devDependents: devDependents[packageName].length
+      directDependents: 0,
+      directDevDependents: devDependents[packageName].length
     })
   }
   process.stderr.write('*')
 })
 
-counts = counts.sort((a, b) => (b.dependents) - (a.dependents))
+counts = counts
+  .map(c => Object.assign(c, {totalDirectDependents: c.directDependents + c.directDevDependents}))
+  .sort((a, b) => (b.totalDirectDependents) - (a.totalDirectDependents))
 
 process.stdout.write(JSON.stringify(counts, null, 2))
