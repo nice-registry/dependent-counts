@@ -15,5 +15,12 @@ test('counts', function (t) {
   t.ok(express.directDependents > 10000, 'has a directDependents count')
   t.ok(express.directDevDependents > 1000, 'has a directDevDependents count')
   t.equal(express.totalDirectDependents, (express.directDependents + express.directDevDependents), 'has a totalDirectDependents sum count')
+
+  t.comment('top 300')
+  const topNames = counts.slice(0,300).map(count => count.name)
+  t.ok(topNames.includes('mocha'), 'should include mocha')
+  t.ok(topNames.includes('express'), 'should include express')
+  t.ok(topNames.includes('request'), 'should include request')
+
   t.end()
 })
